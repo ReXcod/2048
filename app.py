@@ -85,40 +85,7 @@ def update_board(direction):
         st.warning("🚨 Game Over! Refresh to restart.")
 
 def display_board():
-    board_html = """<style>
-    .grid-container {
-        display: grid;
-        grid-template-columns: repeat(4, 80px);
-        gap: 10px;
-        text-align: center;
-        font-size: 24px;
-        font-weight: bold;
-    }
-    .grid-item {
-        width: 80px;
-        height: 80px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        background-color: #eee;
-        border-radius: 10px;
-    }
-    </style>
-    <div class='grid-container'>"""
-    
-    colors = {
-        0: "#ccc", 2: "#eee4da", 4: "#ede0c8", 8: "#f2b179",
-        16: "#f59563", 32: "#f67c5f", 64: "#f65e3b", 128: "#edcf72",
-        256: "#edcc61", 512: "#edc850", 1024: "#edc53f", 2048: "#edc22e"
-    }
-    
-    for row in st.session_state.board:
-        for num in row:
-            color = colors.get(num, "#3c3a32")
-            board_html += f"<div class='grid-item' style='background-color: {color};'>{num if num > 0 else ''}</div>"
-    board_html += "</div>"
-    
-    st.markdown(board_html, unsafe_allow_html=True)
+    st.dataframe(st.session_state.board, height=200, width=400)
 
 display_board()
 
